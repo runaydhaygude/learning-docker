@@ -1,0 +1,13 @@
+
+# Alpine: latest could change. So it is not static in nature or not less frequently changed
+FROM alpine:latest
+
+# we are adding the entire app folder instead of just the jar. That's extra work that is not needed. It should be added right before CMD
+ADD ./ /app/
+
+# we are not combining the OS and Java. We should combine thme on first instruction
+RUN apk add openjdk11
+
+WORKDIR /APP
+
+CMD ["java", "-jar", "layerdemo-0.0.1-SNAPSHOT.jar"]
