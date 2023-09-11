@@ -29,6 +29,13 @@ List of docker commands that I used along this project journey
 8. docker rmi demo-image: Removes (deletes) a Docker image named "demo-image" from the local image repository.
 9. docker rmi -f demo-image: Removes a Docker image named "demo-image" forcefully (ignoring dependencies and running containers).
 10. docker build -f /path/to/Dockerfile . : This command builds a Docker image using the specified Dockerfile located at "/path/to/Dockerfile" with the current directory as the build context.
+11. docker run -itd --name host-volume-app -v ${PWD}/my-host-folder:/container-folder alpine: This command runs an Alpine Linux Docker container in detached mode (-d), with an interactive terminal (-it), and mounts a host folder (${PWD}/my-host-folder) into the container (/container-folder) while naming the container "host-volume-app."
+12. docker volume ls: This Docker command lists all the volumes that have been created on the Docker host.
+13. docker volume rm <volume-name>: to remove a volume from docker host
+14. docker exec -it volume-app touch /container-folder/new-file: This command uses docker exec to run the touch command inside a Docker container named "volume-app" and create a new file named "new-file" in the "/container-folder" directory within the container.
+15. docker exec -it volume-app mkdir -p /container-folder && touch /container-folder/new-file: to make /container-folder if it doesn't exist
+16. docker system prune -a: to remove all the un-used images
+
 
 
 ### Dockerfile Structure
@@ -55,4 +62,35 @@ Docker layering, often referred to as Docker image layers or container layers, i
 6. Start with stable, verified, non-changing version images 
 7. Only add files you need 
 8. Layer Sharing: When multiple images are based on the same parent image and share identical layers, Docker can reuse those layers efficiently. This is beneficial for disk space and download times when pulling images from a registry.
+
+
+### Volumes
+1. volume is persistent storage on docker host or host file-system outside container  
+2. We can have many containers associated with a volume
+
+Types:
+1. Host volume: Shared host filesystem folder: -v /host-folder-full-path:/container-folder-name
+2. Anonymous volume: Shared Docker-managed repository, name generated: -v /container-folder-name
+3. Named volume: Shared Docker-managed repository, name provided: -v name-of-the-volume:/container-folder-name
+
+Command to bind host directory (volume) to container's directory
+1. docker run -itd --name host-volume-app -v ${PWD}/my-host-folder:/container-folder alpine: This command runs an Alpine Linux Docker container in detached mode (-d), with an interactive terminal (-it), and mounts a host folder (${PWD}/my-host-folder) into the container (/container-folder) while naming the container "host-volume-app."
+
+
+### Ports
+1. docker run -p 8080:8080 -itd --name app image: first port is for host and the second one is for container's port
+
+
+### Registry Server
+When pulling the image, docker follows order to get the image
+1. Local Docker cache 
+2. Docker Hub
+3. hub.docker.com
+
+Create a user-friendly tag for the image found in server registry and pushed it into yours
+1. docker login: to push the image without access denied error
+2. docker tag docker.io/library/alpine:latest docker.io/runaydhaygude/alpine:me
+3. docker push docker.io/runaydhaygude/alpine:me
+4. now look into docker hub website in 'Repositories' tab to find the image
+5. docker pull runaydhaygude/alpine:me : now you can pull the image from your repository
 
