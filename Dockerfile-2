@@ -1,0 +1,11 @@
+
+FROM maven:3.6.3-jdk-11 AS builder
+ADD . /project
+WORKDIR /project
+RUN mvn package
+
+FROM openjdk:11-jre-slim
+
+# the jar file gets renamed. when copying the it from builder stage to final stage
+COPY --from=builder /project/target/docker-0.0.1-SNAPSHOT.jar /app/docker.jar
+ENTRYPOINT ["java", "-jar", "/app/docker.jar"]

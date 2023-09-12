@@ -94,3 +94,24 @@ Create a user-friendly tag for the image found in server registry and pushed it 
 4. now look into docker hub website in 'Repositories' tab to find the image
 5. docker pull runaydhaygude/alpine:me : now you can pull the image from your repository
 
+
+### Container Orchestration
+It can be done with any of the following
+1. Docker CLI (manually)
+2. Docker Compose
+3. Docker Swarm
+4. Kubernetes
+
+### Container Orchestration - Manual
+1. docker network ls : loads list of network
+2. docker network create blog-network - is used to create a custom Docker network with the name "blog-network." Docker networks are a fundamental feature of Docker that allow containers to communicate with each other, both on the same host and across different hosts if using Docker Swarm or Kubernetes.
+2. docker run -d --name my-blog-app --network blog-network my-blog-image: This command starts a new container named "my-blog-app" using the "my-blog-image" image and connects it to the "blog-network" so that it can communicate with other containers on the same network.
+3. docker logs <container-name> : to monitor containers
+
+### Container Orchestration - Automated (using Docker Compose)
+1. docker-compose.yml : configuration file
+2. docker-compose up : startup
+3. docker-compose down : teardown
+
+
+
