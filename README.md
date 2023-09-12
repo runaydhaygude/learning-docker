@@ -114,4 +114,26 @@ It can be done with any of the following
 3. docker-compose down : teardown
 
 
+### Alternatives
+We don't need docker file, Also alternatives force best practices. following are the alternatives
+1. Cloud Native Buildpacks
+   1. Download from buildpacks.io - brew install buildpacks/tap/pack
+   2. we need to have docker desktop running
+   2. pack build suggest - list the builder that are provided
+   3. pack build --build <builder-link> <image-name>:<tag> : this creates a image for us
+2. Spring Boot Docker plugin
+   1. only available in spring-boot version 2.3 and higher
+   2. in <plugin> tag add <configuration> for <image> <name>image-name:tag</name></image>
+   3. run - ./mvnw package spring-boot:build-image
+3. Jib
+   1. Docker is not required to be installed. It also pushes the image to service registry for us
+   2. add jib plugin in pom. mention the full path your registry along with image name you want to push the image
+   3. ./mvnw package -DskipTests 
+
+
+### What's next
+Containerization!
+1. kubernetes or Amazon Elastic Kubernetes Service or google cloud run or Azure container Instances or Docker swarm and compose
+
+
 

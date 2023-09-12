@@ -10,14 +10,14 @@ docker run --name db \
     -e POSTGRES_PASSWORD=lmnop \
     -d postgres
 
-docker build -t docker -f ./Dockerfile-2 .
+#docker build -t docker -f ./Dockerfile-2 .Dockerfile-2
 
 
 docker run --name app \
     -p 8080:8080 \
-    -network blog-network \
+    --network blog-network \
     -e POSTGRES_HOST=db \
     -e POSTGRES_DB=blogdemo \
     -e POSTGRES_PASSWORD=lmnop \
-    -d blog-backend
+    -d webapp:buildpack
 

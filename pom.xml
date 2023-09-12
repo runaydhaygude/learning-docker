@@ -59,6 +59,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>webapp-2:tag</name>
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
